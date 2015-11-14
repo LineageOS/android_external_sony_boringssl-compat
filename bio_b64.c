@@ -58,6 +58,7 @@
 
 #include <assert.h>
 #include <errno.h>
+#include <dlfcn.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -116,9 +117,20 @@ static BIO_METHOD methods_b64=
 	b64_callback_ctrl,
 	};
 
+static const BIO_METHOD *(*BIO_f_base64_ptr)(void) = NULL;
+static int search_done = 0;
+
 const BIO_METHOD *BIO_f_base64(void)
 	{
-	return(&methods_b64);
+	/* Make sure we don't override existing symbols */
+	if (!search_done) {
+		BIO_f_base64_ptr = dlsym(RTLD_NEXT, "BIO_f_base64");
+		search_done = 1;
+	}
+	if (BIO_f_base64_ptr)
+		return BIO_f_base64_ptr();
+	else
+		return(&methods_b64);
 	}
 
 static int b64_new(BIO *bi)
