@@ -1,4 +1,4 @@
-/* crypto/evp/p_dec.c */
+/* crypto/objects/obj_dat.c */
 /* Copyright (C) 1995-1998 Eric Young (eay@cryptsoft.com)
  * All rights reserved.
  *
@@ -56,39 +56,7 @@
  * [including the GNU Public Licence.]
  */
 
-#include <stdio.h>
-//#include "cryptlib.h"
-#include "evp.h"
-#include <openssl/rand.h>
-#ifndef OPENSSL_NO_RSA
-#include <openssl/rsa.h>
-#endif
-#include <openssl/evp.h>
-#include <openssl/objects.h>
-#include <openssl/x509.h>
-
-int EVP_PKEY_decrypt_old(unsigned char *key, const unsigned char *ek, int ekl,
-	     EVP_PKEY *priv)
-	{
-	int ret= -1;
-	
-#ifndef OPENSSL_NO_RSA
-	if (priv->type != EVP_PKEY_RSA)
-		{
-#endif
-		EVPerr(EVP_F_EVP_PKEY_DECRYPT_OLD,EVP_R_PUBLIC_KEY_NOT_RSA);
-#ifndef OPENSSL_NO_RSA
-		goto err;
-        }
-	ret=RSA_private_decrypt(ekl,ek,key,priv->pkey.rsa,RSA_PKCS1_PADDING);
-err:
-#endif
-	return(ret);
-	}
-
-int EVP_DecryptFinal(EVP_CIPHER_CTX *ctx, unsigned char *out, int *outl)
-	{
-	int ret;
-	ret = EVP_DecryptFinal_ex(ctx, out, outl);
-	return ret;
-	}
+// This routine has no equivalent in BoringSSL, thus keep it empty
+void OBJ_cleanup(void)
+{
+}

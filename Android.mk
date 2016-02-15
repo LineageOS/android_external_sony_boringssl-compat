@@ -18,8 +18,10 @@ include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
     bio_b64.c \
+    p_eng_lib.c \
     p_dec.c \
     p_enc.c \
+    p_obj_dat.c \
     p_open.c \
     p_seal.c \
     rsa_pss.c
