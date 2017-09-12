@@ -527,7 +527,7 @@ static long b64_ctrl(BIO *b, int cmd, long num, void *ptr)
 		OPENSSL_assert(ctx->buf_len >= ctx->buf_off);
 		ret=ctx->buf_len-ctx->buf_off;
 		if ((ret == 0) && (ctx->encode != B64_NONE)
-			&& (ctx->base64.num != 0))
+			&& (ctx->base64.data_used != 0))
 			ret=1;
 		else if (ret <= 0)
 			ret=BIO_ctrl(b->next_bio,cmd,num,ptr);
@@ -560,7 +560,7 @@ again:
 				goto again;
 				}
 			}
-		else if (ctx->encode != B64_NONE && ctx->base64.num != 0)
+		else if (ctx->encode != B64_NONE && ctx->base64.data_used != 0)
 			{
 			ctx->buf_off=0;
 			EVP_EncodeFinal(&(ctx->base64),
