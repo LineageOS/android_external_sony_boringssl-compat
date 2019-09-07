@@ -21,8 +21,7 @@ LOCAL_SRC_FILES := \
     p_dec.c \
     p_enc.c \
     p_open.c \
-    p_seal.c \
-    rsa_pss.c
+    p_seal.c
 
 LOCAL_SHARED_LIBRARIES := liblog libcrypto
 LOCAL_MODULE := libboringssl-compat
