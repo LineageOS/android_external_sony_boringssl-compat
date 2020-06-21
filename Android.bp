@@ -1,0 +1,15 @@
+cc_library_shared {
+    name: "libboringssl-compat",
+    vendor_available: true,
+    srcs: [
+        "bio_b64.c",
+        "p_dec.c",
+        "p_enc.c",
+        "p_open.c",
+        "p_seal.c",
+    ],
+    shared_libs: [
+        "liblog",
+        "libcrypto",
+    ],
+}
