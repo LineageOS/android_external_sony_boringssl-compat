@@ -22,8 +22,6 @@
 #define EVP_R_PUBLIC_KEY_NOT_RSA			106
 #define EVP_F_EVP_PKEY_ENCRYPT_OLD			152
 
-#define EVPerr(f,r)  (void)0
-
 int		EVP_PKEY_decrypt_old(unsigned char *dec_key,
 			const unsigned char *enc_key,int enc_key_len,
 			EVP_PKEY *private_key);
